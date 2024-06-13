@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+{% if messages %}
+	{% for message in messages %}
+
+		<div class="alert alert-warning alert-dismissible fade show" role="alert">
+		<strong>Enhorabuena!</strong> {{ message }}
+		<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+		</div>
+
+	{% endfor %}
+{% endif %}    
+
+
+
+<div class="container divcontact">
+    <form action="/contacto/" method="post">
+        {% csrf_token %}
+        <!--{{ form }}-->
+        
+        {{ form.non_field_errors }}
+        <div class= "mb-3 text-center">
+            <h1 >Contáctanos</h1>
+            <!-- Nombre -->
+            <label for="{{ form.customer_name.id_for_label }}" class="form-label">
+                {{ form.customer_name.label_tag }}
+            </label>
+            <div>
+                {{ form.customer_name }}
+            </div>
+            <div class="text-danger">
+                {{ form.customer_name.errors }}
+            </div>
+            <!-- Email -->
+            <label for="{{ form.customer_email.id_for_label }}" class="form-label">
+                {{ form.customer_email.label_tag }}
+            </label>
+            <div>
+                {{ form.customer_email }}
+            </div>
+            <div class="text-danger">
+                {{ form.customer_email.errors }}
+            </div>
+            <!-- Mensaje -->
+            <label for="{{ form.message.id_for_label }}" class="form-label">
+                {{ form.message.label_tag }}
+            </label>
+            <div class="text-control">
+                {{ form.message }}
+            </div>
+
+            <input type="submit" value= "Enviar">
+        </div>
+
+    </form>
+</div>
+{% endblock %}
+
